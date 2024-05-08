@@ -1,12 +1,12 @@
-resource "aws_instance" "web_instance" {
-  ami           = var.web_ami_id
-  instance_type = var.web_instance_type
-  subnet_id = var.subnet_id
-  security_groups = [var.my_security_groups]
-  user_data = file("/home/ubuntu/install_apache.sh")
+module "vpc"{
+  source = "./vpc_module"
 
-  tags = {
-    name = "${var.enviornment}-serber" #de/prod server (commonds are terraform apply -var-file dev.tsvars)
-  }
 }
-
+module "ec2_module"{
+  source = "./ec2_instance"
+  web_ami_id= "ami-04b70fa74e45c3917"
+  web_instance_type="t2.micro"
+  subnet_id = module.vpc.subnet_id1
+  my_security_groups = module.vpc.my_security_group_id
+  enviornment="prod"
+}
