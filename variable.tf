@@ -1,12 +1,21 @@
-variable "cidr_block"{
-    default = "10.0.0.0/16"
+variable "web_ami_id" {
+    
+    description = "ami_id of the instance"
+    type = string
 }
-variable "subnet1_cidr"{
-    default ="10.0.1.0/24"
+
+variable "web_instance_type" {
+
+    description = "type of the instance"
+    type = string
 }
-variable "subnet2_cidr"{
-    default = "10.0.2.0/24"
+variable "subnet_id"{
+    description ="this is a public subnet01"
 }
-variable "enviornment"{
-    default = "dev"
+variable "enviornment" {
+    description = "this is to provide tags"
+    type = string
+}
+variable "my_security_groups"{
+    description ="this is a security group cutom created"
 }

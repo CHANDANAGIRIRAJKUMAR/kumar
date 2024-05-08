@@ -1,9 +1,6 @@
-output "subnet_id1"{
-    value =  aws_subnet.my_subnet1.id
+output "output_name" {
+    value = "to accessthis ${var.enviornment} instance use this ${aws_instance.web_instance.public_ip} ip"
 }
-output "subent_id2"{
-    value = aws_subnet.my_subnet2.id
-}
-output "my_security_group_id"{
-    value = aws_security_group.my_security_group.id
+output "instance_state" {
+    value = aws_instance.web_instance.instance_state
 }
