@@ -12,7 +12,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_subnet" "my_subnet1" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = var.my_subnet1
-  availability_zone = "us-west-2a" # Set your desired availability zone
+  availability_zone = "us-east-1a" # Set your desired availability zone
   map_public_ip_on_launch = true    # this ia pubic subnet public_ip enable
 
 }
@@ -20,7 +20,7 @@ resource "aws_subnet" "my_subnet1" {
 resource "aws_subnet" "my_subnet2" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = var.my_subnet2
-  availability_zone = "us-west-2b" # Set your desired availability zone
+  availability_zone = "us-east-1b" # Set your desired availability zone
 }
 
 
@@ -48,4 +48,23 @@ resource "aws_route_table_association" "my_subnet1_association" {
 resource "aws_route_table_association" "my_subnet2_association" {
   subnet_id      = aws_subnet.my_subnet2.id
   route_table_id = aws_route_table.my_route_table.id
+}
+# Create Security Group
+resource "aws_security_group" "my_security_group" {
+  vpc_id = aws_vpc.my_vpc.id
+
+  # Ingress rules for SSH and HTTP (port 22 and 80)
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
