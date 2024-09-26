@@ -7,12 +7,15 @@ variable "web_ami_id" {
 variable "web_instance_type" {
 
     description = "type of the instance"
-    type = string
-}
-variable "subnet_id"{
-    description = "subnet "    
+    type = string    
 }
 variable "enviornment" {
     description = "this is to  dev or prod  tags"
     type = string
+}
+variable "subnet_id" {
+  
+}
+variable "security_group" {
+  
 }
