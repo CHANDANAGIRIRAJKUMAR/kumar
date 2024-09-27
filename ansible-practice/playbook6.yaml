@@ -1,0 +1,19 @@
+---
+- name: Install Apache2 using Script
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy the script file
+      copy:
+        src: /home/ubuntu/install.sh
+        dest: /tmp/
+        
+    - name: Execute the script
+      shell: sh /tmp/install.sh
+
+
+
+
+#!/bin/bash
+sudo apt update -y
+sudo apt install apache2 -y

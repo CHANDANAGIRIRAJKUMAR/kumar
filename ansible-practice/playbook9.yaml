@@ -1,0 +1,26 @@
+---
+- name: Deploy Web Content
+  hosts: all
+  become: yes
+  vars:
+    srcpath: /root/index.html
+    destpath: /var/www/html
+
+  tasks:
+    - name: Install Apache2 package
+      apt:
+        name: apache2
+        state: present
+      notify: Restart Apache
+
+    - name: Copy the file
+      copy:
+        src: "{{ srcpath }}"
+        dest: "{{ destpath }}"
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

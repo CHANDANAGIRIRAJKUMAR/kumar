@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Uninstall packages
+      apt:
+        name:
+          - ntpdate
+          - nmap
+          - nginx
+        state: absent
+        purge: yes
+        autoremove: yes

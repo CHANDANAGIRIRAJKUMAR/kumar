@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+    - name: Demo Playbook
+      apt: 
+        name: apache2 
+        state: present
+
+    - name: Demo for starting service
+      service: 
+        name: apache2 
+        state: started

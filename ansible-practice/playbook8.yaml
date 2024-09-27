@@ -1,0 +1,16 @@
+---
+- name: Example playbook with notify and handler
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache2 package
+      package:
+        name: apache2
+        state: present
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

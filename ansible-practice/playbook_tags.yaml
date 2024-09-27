@@ -1,0 +1,20 @@
+---
+- host: all
+  become: yes
+  tasks: 
+    - name: update chache
+      tags: update
+      apt:
+        update_cache: yes
+    - name: copy a file
+      tags: copy
+      copy:
+        src: /home/ubuntu/a.txt
+        dest: /tmp/
+    - name: replace a file
+      tags: replace
+      replace: 
+        dest: /tmp/a.txt
+        regexp: 'thursday'
+        replace: 'wedensday'
+        

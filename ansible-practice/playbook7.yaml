@@ -1,0 +1,10 @@
+---
+- name: Replace Text in a File
+  hosts: all
+  become: yes
+  tasks:
+    - name: Replace the file
+      replace:
+        dest: /tmp/a.txt
+        regexp: 'Thursday'
+        replace: 'Wednesday'

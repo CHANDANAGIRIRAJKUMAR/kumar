@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install packages
+      apt:
+        name:
+          - ntpdate
+          - nmap
+          - nginx
+        state: present

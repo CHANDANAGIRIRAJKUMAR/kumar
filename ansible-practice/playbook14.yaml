@@ -1,0 +1,51 @@
+---
+- name: Install and configure MySQL and Nginx
+  hosts: test
+  become: yes
+
+  tasks:
+  - name: Install MySQL
+    apt:
+      name: mysql-server
+      state: present
+
+  - name: Start MySQL service
+    service:
+      name: mysql
+      state: started
+      enabled: yes
+
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+
+  - name: Start Nginx service
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: Configure MySQL
+    mysql_user:
+      name: root
+      password: "admin@123"
+      state: present
+
+  - name: Create MySQL database
+    mysql_db:
+      name: "intel"
+      state: present
+
+  - name: Configure Nginx
+    template:
+      src: /home/ubuntu/nginx.conf.j2
+      dest: /etc/nginx/sites-available/default
+      mode: '0644'
+    notify: restart nginx
+
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted

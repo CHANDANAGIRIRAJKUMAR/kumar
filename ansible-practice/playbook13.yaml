@@ -1,0 +1,26 @@
+---
+- name: Uninstall MySQL and nginx
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Stop MySQL service
+    service:
+      name: mysql
+      state: stopped
+
+  - name: Uninstall MySQL
+    apt:
+      name: mysql-server
+      state: absent
+      autoremove: yes
+  - name: Stop Nginx service
+    service:
+      name: nginx
+      state: stopped
+
+  - name: Uninstall Nginx
+    apt:
+      name: nginx
+      state: absent
+      autoremove: yes
